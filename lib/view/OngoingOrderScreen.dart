@@ -170,11 +170,11 @@ class OngoingOrderScreen extends StatelessWidget {
                   onPressed: () async {
                     await provider.completeCurrentOrder();
                     Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  QrScreen()));
-
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                QrScreen(provider.currentOrder.value)));
+                    // await provider.nullifyOrder();
                     // Get.defaultDialog(
                     //   title: "Finish the Order?",
                     //   content: Container(),

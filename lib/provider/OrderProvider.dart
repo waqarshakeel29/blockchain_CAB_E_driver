@@ -108,27 +108,31 @@ class OrderProvider {
     //   content: CircularProgressIndicator(),
     // );
     final order = currentOrder.value;
+
+    order.status = OrderStatus.orderCompleted;
+    order.isCatered = true;
+    await firestore
+        .collection("order")
+        .doc(order.orderId)
+        .update(order.toMap());
+    // Get.offAll(OrderScreen("123"));
+    // Get.defaultDialog(
+    //   title: "Order Completed",
+    //   content: Icon(
+    //     Icons.check,
+    //     size: 48,
+    //   ),
+    // );
+    return true;
+    return false;
+  }
+
+  Future<void> nullifyOrder() {
+    final order = currentOrder.value;
     if (order != null) {
       currentOrder.value = null;
       currentOrder.notifyListeners();
-
-      order.status = OrderStatus.orderCompleted;
-      order.isCatered = true;
-      await firestore
-          .collection("order")
-          .doc(order.orderId)
-          .update(order.toMap());
-      Get.offAll(OrderScreen("123"));
-      Get.defaultDialog(
-        title: "Order Completed",
-        content: Icon(
-          Icons.check,
-          size: 48,
-        ),
-      );
-      return true;
     }
-    return false;
   }
 
   Future<void> cancelCurrentOrder() async {

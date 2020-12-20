@@ -14,6 +14,8 @@ import 'OrderCard.dart';
 //import '../HomePage.dart';
 
 class QrScreen extends StatefulWidget {
+  final Order order;
+  QrScreen(this.order);
   @override
   _QrScreenState createState() => _QrScreenState();
 }
@@ -34,15 +36,32 @@ class _QrScreenState extends State<QrScreen> {
               toolbarHeight: 70,
               backgroundColor: AppColor.primaryColor,
               title: Text(
-                'Order Request',
+                'QR Screen',
               ),
               centerTitle: true,
             ),
-            body: QrImage(
-              data: 'This is a simple QR code',
-              version: QrVersions.auto,
-              size: 320,
-              gapless: false,
+            body: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                  child: Text(
+                    'Let the Rider Scan QR',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: AppColor.primaryColor,
+                        fontSize: 22),
+                  ),
+                ),
+                Center(
+                  child: QrImage(
+                    data: widget.order.fare.toString(),
+                    version: QrVersions.auto,
+                    size: 320,
+                    gapless: false,
+                  ),
+                ),
+              ],
             )),
       ),
     );
