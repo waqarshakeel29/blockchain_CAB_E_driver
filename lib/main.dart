@@ -6,12 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
 import 'provider/network_provider.dart';
+import 'package:cab_e_driver/provider/wallet_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   GetIt.I.registerSingleton(OrderProvider());
   GetIt.I.registerSingleton(NetworkProvider());
+  GetIt.I.registerSingleton(WalletProvider());
   runApp(MyApp());
 }
 
